@@ -1,0 +1,10 @@
+export * as BrandController from "../controllers/BrandController.js";
+export * as DiscountController from "../controllers/DiscountController.js";
+export * as ProductController from "../controllers/ProductController.js";
+export * as CategoryController from "../controllers/CategoryController.js";
+export * as UserController from "../controllers/UserController.js";
+export * as OrderController from "../controllers/OrderController.js";
+export * as OrderDetailController from "../controllers/OrderDetailController.js";
+export * as AccountController from "../controllers/AccountController.js";
+export * as ArticleController from "../controllers/ArticleController.js";
+export * as PaymentController from "../controllers/PaymentController.js";
