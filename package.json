@@ -2,14 +2,13 @@
     "name": "server",
     "version": "1.0.0",
     "description": "",
-    "type": "module",
     "main": "index.js",
     "engines": {
         "node": "20.x"
     },
     "scripts": {
         "dev": "nodemon --inspect --exec babel-node index.js",
-        "start": "node index.js"
+        "start": "node --inspect --exec babel-node index.js"
     },
     "author": "",
     "license": "ISC",
