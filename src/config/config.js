@@ -1,6 +1,6 @@
 import mysql2 from "mysql2"; // Needed to fix sequelize issues with WebPack
 
-module.exports = {
+export default {
   development: {
     username: "uztnf0ppw2uklml6",
     password: "DSrbsHEVxuPwQdq6GwH8",
@@ -25,6 +25,5 @@ module.exports = {
     host: "bvrl6sae6blvxptr63kn-mysql.services.clever-cloud.com",
     port: "3306",
     dialect: "mysql",
-    dialectModule: mysql2,
   },
 };

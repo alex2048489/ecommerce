@@ -1,5 +1,5 @@
 import db from "../models/index.js";
-const Sequelize = require("sequelize");
+import Sequelize from "sequelize";
 const Op = Sequelize.Op;
 
 export const addOrderDetail = async (req, res) => {

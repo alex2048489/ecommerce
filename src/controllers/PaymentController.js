@@ -1,7 +1,8 @@
 //import fetch from 'node-fetch';
 import db from "../models/index.js";
-const Sequelize = require("sequelize");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import Sequelize from "sequelize";
+import Stripe from "stripe";
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const addTransaction = async (req, res) => {
   try {

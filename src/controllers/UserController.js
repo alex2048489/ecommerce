@@ -1,6 +1,6 @@
 import db from "../models/index.js";
 import bcrypt from "bcrypt";
-const Sequelize = require("sequelize");
+import Sequelize from "sequelize";
 import jwt from "jsonwebtoken";
 const Op = Sequelize.Op;
 
