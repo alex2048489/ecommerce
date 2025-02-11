@@ -1,8 +1,8 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-export const getDiscount = async (req, res) => {
+const getDiscount = async (req, res) => {
   try {
     const pageCurrent = parseInt(req.query.page) || 1;
     const getAll = req.query.getAll;
@@ -27,7 +27,7 @@ export const getDiscount = async (req, res) => {
   }
 };
 
-export const addDiscount = async (req, res) => {
+const addDiscount = async (req, res) => {
   try {
     await db.Banner.create({
       name: req.body.name,
@@ -39,7 +39,7 @@ export const addDiscount = async (req, res) => {
   }
 };
 
-export const deleteDiscount = async (req, res) => {
+const deleteDiscount = async (req, res) => {
   const idDiscount = req.params.id;
   try {
     await db.Banner.destroy({
@@ -53,7 +53,7 @@ export const deleteDiscount = async (req, res) => {
   }
 };
 
-export const detailDiscount = async (req, res) => {
+const detailDiscount = async (req, res) => {
   const idDiscount = req.params.id;
   const data = await db.Banner.findOne({
     where: { id: idDiscount },
@@ -62,7 +62,7 @@ export const detailDiscount = async (req, res) => {
   return res.status(200).json({ discount: data });
 };
 
-export const editDiscount = async (req, res) => {
+const editDiscount = async (req, res) => {
   try {
     const idDiscount = req.params.id;
     const discount = await db.Banner.findOne({ where: { id: idDiscount } });
@@ -75,7 +75,7 @@ export const editDiscount = async (req, res) => {
   }
 };
 
-export const searchDiscount = async (req, res) => {
+const searchDiscount = async (req, res) => {
   const searchQuery = req.query.name;
   const pageCurrent = parseInt(req.query.page) || 1;
   const pageSize = 4;
@@ -96,4 +96,13 @@ export const searchDiscount = async (req, res) => {
   });
 
   return res.status(200).json({ result: data, availableDiscount: dataCount });
+};
+
+module.exports = {
+  getDiscount,
+  addDiscount,
+  deleteDiscount,
+  detailDiscount,
+  editDiscount,
+  searchDiscount,
 };

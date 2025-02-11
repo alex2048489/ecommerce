@@ -1,26 +1,23 @@
 {
-  "development": {
-    "username": "uknk8yufzduruwtb",
-    "password": "FApN8CwpIxyKCmLaTYKt",
-    "database": "bvrl6sae6blvxptr63kn",
-    "host": "bvrl6sae6blvxptr63kn-mysql.services.clever-cloud.com",
-    "port": "3306",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "uknk8yufzduruwtb",
-    "password": "FApN8CwpIxyKCmLaTYKt",
-    "database": "bvrl6sae6blvxptr63kn",
-    "host": "bvrl6sae6blvxptr63kn-mysql.services.clever-cloud.com",
-    "port": "3306",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "uknk8yufzduruwtb",
-    "password": "FApN8CwpIxyKCmLaTYKt",
-    "database": "bvrl6sae6blvxptr63kn",
-    "host": "bvrl6sae6blvxptr63kn-mysql.services.clever-cloud.com",
-    "port": "3306",
-    "dialect": "mysql"
-  }
+    "development": {
+        "username": "root",
+        "password": null,
+        "database": "full_ecommerce",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    },
+    "test": {
+        "username": "root",
+        "password": null,
+        "database": "full_ecommerce",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    },
+    "production": {
+        "username": "root",
+        "password": null,
+        "database": "database_production",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    }
 }

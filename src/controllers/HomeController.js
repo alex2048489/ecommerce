@@ -1,5 +1,5 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const HomeController = async (req, res) => {
   const brandQuery = req.query.brand;
@@ -75,4 +75,4 @@ const HomeController = async (req, res) => {
 
   return res.status(200).json({ result: data, availableProduct: dataCount });
 };
-export default HomeController;
+module.exports = HomeController;

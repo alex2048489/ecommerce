@@ -1,8 +1,8 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-export const getOrder = async (req, res) => {
+const getOrder = async (req, res) => {
   const pageCurrent = parseInt(req.query.page) || 1;
   const pageSize = 4;
   const offset = (pageCurrent - 1) * pageSize;
@@ -20,7 +20,7 @@ export const getOrder = async (req, res) => {
   return res.status(200).json({ orders: data, countAllOrder: dataCount }); // Count all Brand without limit to set pageCount
 };
 
-export const addOrder = async (req, res) => {
+const addOrder = async (req, res) => {
   const { user_id, status, total, address, payment_cash, phone } = req.body;
   console.log("req.body: ", req.body);
   try {
@@ -52,7 +52,7 @@ export const addOrder = async (req, res) => {
   }
 };
 
-export const detailUser = async (req, res) => {
+const detailUser = async (req, res) => {
   // const idBrand = req.params.id;
   const email = req.params.email;
 
@@ -60,7 +60,7 @@ export const detailUser = async (req, res) => {
   return res.status(200).json({ user: data });
 };
 
-export const cancelOrder = async (req, res) => {
+const cancelOrder = async (req, res) => {
   try {
     const order = await db.Order.findByPk(req.params.id);
     if (order) {
@@ -73,7 +73,7 @@ export const cancelOrder = async (req, res) => {
   }
 };
 
-export const editOrder = async (req, res) => {
+const editOrder = async (req, res) => {
   try {
     const idOrder = req.params.id;
     const status = req.body.status;
@@ -87,7 +87,7 @@ export const editOrder = async (req, res) => {
   }
 };
 
-export const searchOrder = async (req, res) => {
+const searchOrder = async (req, res) => {
   const order_id = req.query.order_id;
   const user_id = req.query.user_id;
 
@@ -135,4 +135,13 @@ export const searchOrder = async (req, res) => {
   });
 
   return res.status(200).json({ result: user_id ? orders : data });
+};
+
+module.exports = {
+  getOrder,
+  addOrder,
+  detailUser,
+  cancelOrder,
+  editOrder,
+  searchOrder,
 };

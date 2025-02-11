@@ -1,8 +1,8 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-export const getProduct = async (req, res) => {
+const getProduct = async (req, res) => {
   const pageCurrent = parseInt(req.query.page) || 1;
   const pageSize = req.query.limit ? parseInt(req.query.limit) : 4;
   const offset = (pageCurrent - 1) * pageSize;
@@ -17,7 +17,7 @@ export const getProduct = async (req, res) => {
   return res.status(200).json({ products: data, countAllProduct: dataCount }); // Count all products without limit to set pageCount
 };
 
-export const addProduct = async (req, res) => {
+const addProduct = async (req, res) => {
   try {
     await db.Product.create({
       name: req.body.name,
@@ -36,7 +36,7 @@ export const addProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res) => {
   const idProduct = req.params.id;
   try {
     await db.Product.destroy({
@@ -50,7 +50,7 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-export const detailProduct = async (req, res) => {
+const detailProduct = async (req, res) => {
   const nameProduct = req.query.name;
   const idProduct = req.query.id;
 
@@ -62,7 +62,7 @@ export const detailProduct = async (req, res) => {
   return res.status(200).json({ product: data });
 };
 
-export const editProduct = async (req, res) => {
+const editProduct = async (req, res) => {
   try {
     const idProduct = req.params.id;
     const product = await db.Product.findOne({
@@ -87,7 +87,7 @@ export const editProduct = async (req, res) => {
   }
 };
 
-export const searchProduct = async (req, res) => {
+const searchProduct = async (req, res) => {
   const nameQuery = req.query.name;
 
   const pageCurrent = parseInt(req.query.page) || 1;
@@ -112,4 +112,13 @@ export const searchProduct = async (req, res) => {
   });
 
   return res.status(200).json({ result: data, availableProduct: dataCount });
+};
+
+module.exports = {
+  getProduct,
+  addProduct,
+  deleteProduct,
+  detailProduct,
+  editProduct,
+  searchProduct,
 };

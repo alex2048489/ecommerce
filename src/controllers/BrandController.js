@@ -1,8 +1,8 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-export const getBrand = async (req, res) => {
+const getBrand = async (req, res) => {
   const pageCurrent = parseInt(req.query.page) || 1;
   const getAll = req.query.getAll;
   const pageSize = 4;
@@ -20,7 +20,7 @@ export const getBrand = async (req, res) => {
   return res.status(200).json({ brands: data, countAllBrand: dataCount }); // Count all Brand without limit to set pageCount
 };
 
-export const addBrand = async (req, res) => {
+const addBrand = async (req, res) => {
   try {
     await db.Brand.create({
       name: req.body.name,
@@ -32,7 +32,7 @@ export const addBrand = async (req, res) => {
   }
 };
 
-export const deleteBrand = async (req, res) => {
+const deleteBrand = async (req, res) => {
   const idBrand = req.params.id;
   try {
     await db.Brand.destroy({
@@ -46,13 +46,13 @@ export const deleteBrand = async (req, res) => {
   }
 };
 
-export const detailBrand = async (req, res) => {
+const detailBrand = async (req, res) => {
   const idBrand = req.params.id;
   const data = await db.Brand.findOne({ where: { id: idBrand }, raw: true });
   return res.status(200).json({ brand: data });
 };
 
-export const editBrand = async (req, res) => {
+const editBrand = async (req, res) => {
   try {
     const idBrand = req.params.id;
     const brand = await db.Brand.findOne({ where: { id: idBrand } });
@@ -65,7 +65,7 @@ export const editBrand = async (req, res) => {
   }
 };
 
-export const searchBrand = async (req, res) => {
+const searchBrand = async (req, res) => {
   const searchQuery = req.query.name;
   const pageCurrent = parseInt(req.query.page) || 1;
   const pageSize = 4;
@@ -86,4 +86,13 @@ export const searchBrand = async (req, res) => {
   });
 
   return res.status(200).json({ result: data, availableBrand: dataCount });
+};
+
+module.exports = {
+  getBrand,
+  addBrand,
+  deleteBrand,
+  detailBrand,
+  editBrand,
+  searchBrand,
 };

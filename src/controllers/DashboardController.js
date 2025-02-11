@@ -1,5 +1,5 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const DashboardController = async (req, res) => {
   const totalOrder = await db.Order.count();
   const totalProduct = await db.Product.count();
@@ -15,4 +15,4 @@ const DashboardController = async (req, res) => {
     },
   });
 };
-export default DashboardController;
+module.exports = DashboardController;

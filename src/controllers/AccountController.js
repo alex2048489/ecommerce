@@ -1,8 +1,8 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-export const getAccount = async (req, res) => {
+const getAccount = async (req, res) => {
   const pageCurrent = parseInt(req.query.page) || 1;
   const getAll = req.query.getAll;
   const pageSize = 4;
@@ -20,13 +20,13 @@ export const getAccount = async (req, res) => {
   return res.status(200).json({ accounts: data, countAllAccount: dataCount }); // Count all Brand without limit to set pageCount
 };
 
-export const detailUser = async (req, res) => {
+const detailUser = async (req, res) => {
   const email = req.params.email;
   const data = await db.Brand.findOne({ where: { email: email }, raw: true });
   return res.status(200).json({ user: data });
 };
 
-export const editAccount = async (req, res) => {
+const editAccount = async (req, res) => {
   try {
     const idAccount = req.params.id;
     const status = req.body.status;
@@ -39,7 +39,7 @@ export const editAccount = async (req, res) => {
   }
 };
 
-export const searchAccount = async (req, res) => {
+const searchAccount = async (req, res) => {
   const email = req.query.email;
 
   const pageCurrent = parseInt(req.query.page) || 1;
@@ -61,4 +61,11 @@ export const searchAccount = async (req, res) => {
   });
 
   return res.status(200).json({ result: data, availableUser: dataCount });
+};
+
+module.exports = {
+  getAccount,
+  detailUser,
+  editAccount,
+  searchAccount,
 };

@@ -1,10 +1,9 @@
 //import fetch from 'node-fetch';
-import db from "../models/index.js";
-import Sequelize from "sequelize";
-import Stripe from "stripe";
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-export const addTransaction = async (req, res) => {
+const addTransaction = async (req, res) => {
   try {
     const { id, account, isSuccess, order_id, pay_method, fullName } = req.body;
     await db.Transaction.create({
@@ -21,7 +20,7 @@ export const addTransaction = async (req, res) => {
   }
 };
 
-export const createCheckoutSession = async (req, res) => {
+const createCheckoutSession = async (req, res) => {
   try {
     const { products, orderInfo, listCart } = req.body;
     const customer = await stripe.customers.create({
@@ -59,7 +58,7 @@ export const createCheckoutSession = async (req, res) => {
   }
 };
 
-export const handleStripeWebhook = async (req, res) => {
+const handleStripeWebhook = async (req, res) => {
   const api_url = req.protocol + "://" + req.get("host") + "/api";
   try {
     let data;
@@ -139,6 +138,12 @@ export const handleStripeWebhook = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: "Thêm giao dich thất bại", error });
   }
+};
+
+module.exports = {
+  addTransaction,
+  createCheckoutSession,
+  handleStripeWebhook,
 };
 
 //stripe listen --forward-to localhost:8000/api/payment/webhooks

@@ -1,8 +1,8 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-export const getCategory = async (req, res) => {
+const getCategory = async (req, res) => {
   const pageCurrent = parseInt(req.query.page) || 1;
   const getAll = req.query.getAll;
   const pageSize = 4;
@@ -22,7 +22,7 @@ export const getCategory = async (req, res) => {
     .json({ categories: data, countAllCategory: dataCount }); // Count all Category without limit to set pageCount
 };
 
-export const addCategory = async (req, res) => {
+const addCategory = async (req, res) => {
   try {
     await db.Category.create({
       name: req.body.name,
@@ -34,7 +34,7 @@ export const addCategory = async (req, res) => {
   }
 };
 
-export const deleteCategory = async (req, res) => {
+const deleteCategory = async (req, res) => {
   const idCategory = req.params.id;
   try {
     await db.Category.destroy({
@@ -48,7 +48,7 @@ export const deleteCategory = async (req, res) => {
   }
 };
 
-export const detailCategory = async (req, res) => {
+const detailCategory = async (req, res) => {
   const idCategory = req.params.id;
   const data = await db.Category.findOne({
     where: { id: idCategory },
@@ -57,7 +57,7 @@ export const detailCategory = async (req, res) => {
   return res.status(200).json({ category: data });
 };
 
-export const editCategory = async (req, res) => {
+const editCategory = async (req, res) => {
   try {
     const idCategory = req.params.id;
     const category = await db.Category.findOne({ where: { id: idCategory } });
@@ -70,7 +70,7 @@ export const editCategory = async (req, res) => {
   }
 };
 
-export const searchCategory = async (req, res) => {
+const searchCategory = async (req, res) => {
   const searchQuery = req.query.name;
   const pageCurrent = parseInt(req.query.page) || 1;
   const pageSize = 4;
@@ -91,4 +91,13 @@ export const searchCategory = async (req, res) => {
   });
 
   return res.status(200).json({ result: data, availableCategory: dataCount });
+};
+
+module.exports = {
+  getCategory,
+  addCategory,
+  deleteCategory,
+  detailCategory,
+  editCategory,
+  searchCategory,
 };

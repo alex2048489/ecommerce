@@ -1,8 +1,8 @@
-import db from "../models/index.js";
-import Sequelize from "sequelize";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-export const getArticle = async (req, res) => {
+const getArticle = async (req, res) => {
   const pageCurrent = parseInt(req.query.page) || 1;
   const getAll = req.query.getAll;
   const pageSize = req.query.limit ? parseInt(req.query.limit) : 4;
@@ -20,7 +20,7 @@ export const getArticle = async (req, res) => {
   return res.status(200).json({ articles: data, countAllArticle: dataCount }); // Count all Article without limit to set pageCount
 };
 
-export const addArticle = async (req, res) => {
+const addArticle = async (req, res) => {
   try {
     const news = await db.News.create({
       title: req.body.title,
@@ -48,7 +48,7 @@ export const addArticle = async (req, res) => {
   }
 };
 
-export const deleteArticle = async (req, res) => {
+const deleteArticle = async (req, res) => {
   const idArticle = req.params.id;
   try {
     await db.News_detail.destroy({
@@ -67,7 +67,7 @@ export const deleteArticle = async (req, res) => {
   }
 };
 
-export const detailArticle = async (req, res) => {
+const detailArticle = async (req, res) => {
   const idArticle = req.params.id;
   const news = await db.News.findOne({
     where: {
@@ -91,7 +91,7 @@ export const detailArticle = async (req, res) => {
   return res.status(200).json({ article: data });
 };
 
-export const editArticle = async (req, res) => {
+const editArticle = async (req, res) => {
   try {
     const idArticle = req.params.id;
     const article = await db.News.findOne({ where: { id: idArticle } });
@@ -105,7 +105,7 @@ export const editArticle = async (req, res) => {
   }
 };
 
-export const searchArticle = async (req, res) => {
+const searchArticle = async (req, res) => {
   const searchQuery = req.query.title;
   const pageCurrent = parseInt(req.query.page) || 1;
   const pageSize = req.query.limit ? parseInt(req.query.limit) : 4;
@@ -126,4 +126,13 @@ export const searchArticle = async (req, res) => {
   });
 
   return res.status(200).json({ result: data, availableArticle: dataCount });
+};
+
+module.exports = {
+  getArticle,
+  addArticle,
+  deleteArticle,
+  detailArticle,
+  editArticle,
+  searchArticle,
 };

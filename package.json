@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "engines": {
     "node": "20.x"
   },
   "scripts": {
-    "dev": "nodemon --inspect --exec babel-node index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon --inspect --exec babel-node index.js"
   },
   "author": "",
   "license": "ISC",

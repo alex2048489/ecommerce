@@ -1,10 +1,12 @@
-export * as BrandController from "../controllers/BrandController.js";
-export * as DiscountController from "../controllers/DiscountController.js";
-export * as ProductController from "../controllers/ProductController.js";
-export * as CategoryController from "../controllers/CategoryController.js";
-export * as UserController from "../controllers/UserController.js";
-export * as OrderController from "../controllers/OrderController.js";
-export * as OrderDetailController from "../controllers/OrderDetailController.js";
-export * as AccountController from "../controllers/AccountController.js";
-export * as ArticleController from "../controllers/ArticleController.js";
-export * as PaymentController from "../controllers/PaymentController.js";
+module.exports = {
+  BrandController: require("../controllers/BrandController.js"),
+  DiscountController: require("../controllers/DiscountController.js"),
+  ProductController: require("../controllers/ProductController.js"),
+  CategoryController: require("../controllers/CategoryController.js"),
+  UserController: require("../controllers/UserController.js"),
+  OrderController: require("../controllers/OrderController.js"),
+  OrderDetailController: require("../controllers/OrderDetailController.js"),
+  AccountController: require("../controllers/AccountController.js"),
+  ArticleController: require("../controllers/ArticleController.js"),
+  PaymentController: require("../controllers/PaymentController.js"),
+};

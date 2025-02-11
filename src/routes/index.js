@@ -1,7 +1,7 @@
-import express from "express";
-import HomeController from "../controllers/HomeController.js";
-import DashboardController from "../controllers/DashboardController.js";
-import {
+const express = require("express");
+const HomeController = require("../controllers/HomeController.js");
+const DashboardController = require("../controllers/DashboardController.js");
+const {
   AccountController,
   ArticleController,
   BrandController,
@@ -12,10 +12,10 @@ import {
   PaymentController,
   ProductController,
   UserController,
-} from "../controllers/index.js";
+} = require("../controllers/index.js");
 
 const router = express.Router();
-export const initAPIRoutes = (app) => {
+module.exports = (app) => {
   //Homepage
   router.get("/search", HomeController);
 

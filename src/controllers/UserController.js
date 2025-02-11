@@ -1,10 +1,11 @@
-import db from "../models/index.js";
-import bcrypt from "bcrypt";
-import Sequelize from "sequelize";
-import jwt from "jsonwebtoken";
+const db = require("../models/index.js");
+const Sequelize = require("sequelize");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 const Op = Sequelize.Op;
 
-export const addUser = async (req, res) => {
+const addUser = async (req, res) => {
   try {
     const userInfo = await db.User.findOne({
       where: { email: req.body.email },
@@ -24,7 +25,7 @@ export const addUser = async (req, res) => {
   }
 };
 
-export const loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const userInfo = await db.User.findOne({
@@ -57,14 +58,14 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const detailUser = async (req, res) => {
+const detailUser = async (req, res) => {
   // const idBrand = req.params.id;
   const email = req.query.email;
   const data = await db.User.findOne({ where: { email: email }, raw: true });
   return res.status(200).json({ user: data });
 };
 
-export const logoutUser = async (req, res) => {
+const logoutUser = async (req, res) => {
   try {
     console.log("Log out success");
     res.clearCookie("user");
@@ -72,4 +73,11 @@ export const logoutUser = async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
+};
+
+module.exports = {
+  addUser,
+  loginUser,
+  detailUser,
+  logoutUser,
 };
